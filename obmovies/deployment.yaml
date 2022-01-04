@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: obmovies
+---
+
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  namespace: obmovies
+  name: ds-priority
+value: 1000000
+globalDefault: false
+description: "This priority class should be used for DaemonSet services only as PreemptionPolicy defaults to PreemptLowerPriority"
+---
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  namespace: obmovies
+  name: obmovies
+spec:
+  selector:
+      matchLabels:
+        name: obmovies
+  template:
+    metadata:
+      labels:
+        name: obmovies
+    spec:
+      priorityClassName: ds-priority
+      containers:
+      - name: obmovies
+        image: obmovies_app
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        args:
+        - python
+        - run.py
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+
+

@@ -1,0 +1,5 @@
+#ignore creds
+*.ini
+#used for setting up venv etc 
+ujjwal_setup.sh
+
