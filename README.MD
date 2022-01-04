@@ -112,3 +112,19 @@ Each ticket will contain the command to run that ticket's specific unit tests.
 - You can submit your solution to Tech-challenge@orderbird.com
 - Update `README.MD` so we know how to run your solution and the Kubernetes cluster solution/tool we should use.
 - Leave the git history in tact and don't fork this repo as other candidates could then start building on your solution :wink:
+
+
+Simple steps tp run this app 
+First 
+Docker - v18.09.7
+Mk v1.17.0 running k8s 1.18
+
+Second step :
+insert correct values and setup dotini_unix and rename to .ini ( as security measure it wont get uploaded to the public repo and ignored )
+
+Third step:
+cd obmovies && docker-compose up 
+#can exit using ^+C
+kubectl create -f deployment.yaml
+
+
